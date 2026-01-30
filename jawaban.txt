@@ -1,0 +1,32 @@
+1. Create Database
+CREATE DATABASE mylibrary;
+
+2. Create Table
+- genres
+CREATE table genres( id integer PRIMARY KEY AUTO_INCREMENT, name varchar(255) NOT null );
+
+- movies
+CREATE TABLE movies ( id integer PRIMARY KEY AUTO_INCREMENT, title varchar(255) NOT null, summary text NOT null, stock integer not null, genre_id integer NOT null, FOREIGN KEY(genre_id) REFERENCES genres(id) );
+
+3. Insert Data
+- Genres
+INSERT INTO genres (name) VALUES ("comedi"), ("Drama"), ("Action");
+
+- Movies
+INSERT INTO movies(title, summary, stock, genre_id) VALUES("One Battle After Another", "When their enemy resurfaces after 16 years, a group of ex-revolutionaries reunite to rescue the daughter of one of their own.", 50, 3);
+INSERT INTO movies(title, summary, stock, genre_id) VALUES("Sinners", "Trying to leave their troubled lives behind, twin brothers return to their hometown to start again, only to discover that an even greater evil is waiting to welcome them back.", 60, 3);
+INSERT INTO movies(title, summary, stock, genre_id) VALUES("Marty Supreme", "Marty Mauser, a young man with a dream no one respects, goes to hell and back in pursuit of greatness.", 90, 2);
+
+4. Select Data
+4a
+SELECT id, title, summary, stock from movies;
+
+4b
+- SELECT * FROM movies WHERE stock > 55;
+- SELECT * FROM movies WHERE title LIKE "%battle%";
+
+4c
+SELECT movies.* , genres.name AS genre from movies LEFT JOIN genres ON movies.genre_id = genres.id;
+
+5. Update Data
+UPDATE movies set stock=100 WHERE id = 3;
